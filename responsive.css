@@ -1,0 +1,285 @@
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .search-bar {
+        flex: 0 1 350px;
+        margin: 0 15px;
+    }
+    
+    .hero h1 {
+        font-size: 42px;
+        letter-spacing: 1px;
+    }
+    
+    .hero p {
+        font-size: 19px;
+    }
+    
+    .categories-grid,
+    .products-grid,
+    .features-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+    
+    .section {
+        padding: 80px 0;
+    }
+    
+    .nav-links {
+        gap: 30px;
+    }
+    
+    .btn {
+        padding: 12px 30px;
+    }
+    
+    .newsletter-form {
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .logo {
+        order: 1;
+        font-size: 28px;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+        order: 2;
+    }
+    
+    .header-actions {
+        order: 3;
+        gap: 15px;
+    }
+    
+    .search-bar {
+        order: 4;
+        flex: 1 1 100%;
+        margin: 20px 0 0;
+    }
+    
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--glass-bg);
+        backdrop-filter: var(--glass-blur);
+        border-bottom: var(--glass-border);
+        padding: 20px;
+        box-shadow: var(--shadow);
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+    
+    .nav-links.active {
+        display: flex;
+        animation: slideDown 0.4s ease-out;
+    }
+    
+    .hero {
+        padding: 90px 0;
+        background-attachment: scroll;
+    }
+    
+    .hero h1 {
+        font-size: 36px;
+    }
+    
+    .btn {
+        display: block;
+        width: 100%;
+        margin: 10px auto;
+    }
+    
+    .btn-outline {
+        margin-left: 0;
+        border-color: var(--white);
+    }
+    
+    .cart-sidebar {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .newsletter-form input {
+        border-radius: 50px;
+        margin-bottom: 0;
+    }
+    
+    .newsletter-form button {
+        border-radius: 50px;
+        padding: 15px;
+        width: 100%;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .filters {
+        gap: 15px;
+    }
+    
+    .pagination {
+        gap: 8px;
+    }
+    
+    .countdown {
+        gap: 15px;
+    }
+    
+    .countdown-number {
+        font-size: 28px;
+    }
+    
+    .category-card,
+    .product-card {
+        height: auto;
+    }
+    
+    .product-img {
+        height: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .top-bar-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .top-bar-links {
+        gap: 15px;
+    }
+    
+    .hero {
+        padding: 70px 0;
+    }
+    
+    .hero h1 {
+        font-size: 30px;
+        letter-spacing: 0.5px;
+    }
+    
+    .hero p {
+        font-size: 17px;
+    }
+    
+    .section-title {
+        font-size: 30px;
+    }
+    
+    .section {
+        padding: 60px 0;
+    }
+    
+    .categories-grid,
+    .products-grid,
+    .features-grid,
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .product-card,
+    .category-card,
+    .feature-card {
+        height: auto;
+    }
+    
+    .product-img {
+        height: 220px;
+    }
+    
+    .cart-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cart-item-img {
+        width: 100%;
+        height: 150px;
+    }
+    
+    .page-header {
+        padding: 60px 0;
+    }
+    
+    .page-header h1 {
+        font-size: 32px;
+    }
+    
+    .newsletter {
+        padding: 60px 0;
+    }
+    
+    .newsletter h2 {
+        font-size: 28px;
+    }
+    
+    .footer-content {
+        gap: 30px;
+    }
+    
+    .action-item {
+        font-size: 11px;
+    }
+    
+    .action-item i {
+        font-size: 20px;
+    }
+    
+    .header-actions {
+        gap: 15px;
+    }
+    
+    .btn {
+        padding: 12px 20px;
+    }
+    
+    .filter-btn {
+        padding: 8px 20px;
+    }
+    
+    .page-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .countdown-item {
+        padding: 15px;
+    }
+    
+    .countdown-number {
+        font-size: 24px;
+    }
+}

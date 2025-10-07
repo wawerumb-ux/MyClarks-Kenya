@@ -1,0 +1,44 @@
+myclarks-kenya/
+├── index.html
+├── styles/
+│   ├── main.css
+│   └── responsive.css
+├── scripts/
+│   └── main.js
+├── images/
+│   ├── logo.png
+│   ├── hero-banner.jpg
+│   ├── category-men.jpg
+│   ├── category-women.jpg
+│   ├── category-kids.jpg
+│   ├── product-1.jpg
+│   ├── product-2.jpg
+│   ├── product-3.jpg
+│   └── product-4.jpg
+├── collections/
+│   ├── new-arrivals.html
+│   ├── mens-shoes.html
+│   ├── womens-shoes.html
+│   ├── kids-shoes.html
+│   ├── sale.html
+│   ├── shop-all.html
+│   ├── all-collections.html
+│   └── best-sellers.html
+├── categories/
+│   ├── casual-shoes.html
+│   └── formal-shoes.html
+├── pages/
+│   ├── customer-service.html
+│   ├── track-order.html
+│   ├── returns-exchanges.html
+│   ├── shipping-info.html
+│   ├── size-guide.html
+│   ├── our-story.html
+│   ├── careers.html
+│   ├── sustainability.html
+│   ├── press.html
+│   ├── corporate-responsibility.html
+│   ├── store-locator.html
+│   ├── help-center.html
+│   └── contact.html
+└── README.md

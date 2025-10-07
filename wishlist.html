@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - MyClarks Kenya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <style>
+        .wishlist-section {
+            padding: 80px 0;
+        }
+
+        .wishlist-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .wishlist-header h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .wishlist-count {
+            color: var(--text-light);
+            font-size: 18px;
+        }
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .wishlist-item {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .wishlist-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .wishlist-actions {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 2;
+        }
+
+        .wishlist-action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .wishlist-action-btn.remove {
+            color: #e74c3c;
+        }
+
+        .wishlist-action-btn.remove:hover {
+            background: #e74c3c;
+            color: var(--white);
+        }
+
+        .wishlist-action-btn.cart {
+            color: var(--accent);
+        }
+
+        .wishlist-action-btn.cart:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .wishlist-empty {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .wishlist-empty i {
+            font-size: 64px;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .wishlist-empty h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .wishlist-empty p {
+            color: var(--text-light);
+            margin-bottom: 30px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .wishlist-sort {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .sort-select {
+            padding: 8px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            background: var(--white);
+            color: var(--text);
+        }
+
+        .wishlist-share {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            background: var(--light);
+            border-radius: 5px;
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        .share-btn:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .sale-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .wishlist-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+
+        .wishlist-notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .wishlist-sort {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .wishlist-share {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div>Free delivery on orders over KES 5,000</div>
+                <div class="top-bar-links">
+                    <a href="store-locator.html">Store Locator</a>
+                    <a href="help-center.html">Help</a>
+                    <a href="contact.html">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-main">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="../index.html">
+                            <i class="fas fa-shoe-prints"></i>
+                            MyClarks Kenya<span>| Shop Leather, Casual & Formal Shoes Online</span>
+                        </a>
+                    </div>
+                    
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search for shoes...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    
+                    <div class="header-actions">
+                        <div class="action-item">
+                            <a href="account.html">
+                                <i class="fas fa-user"></i>
+                                <span>Account</span>
+                            </a>
+                        </div>
+                        <div class="action-item">
+                            <a href="wishlist.html">
+                                <i class="fas fa-heart"></i>
+                                <span>Wishlist</span>
+                            </a>
+                        </div>
+                        <div class="action-item cart-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>Cart</span>
+                            <span class="cart-count">2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <nav>
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="../collections/new-arrivals.html">New Arrivals</a></li>
+                    <li><a href="../collections/mens-shoes.html">Men</a></li>
+                    <li><a href="../collections/womens-shoes.html">Women</a></li>
+                    <li><a href="../collections/kids-shoes.html">Kids</a></li>
+                    <li><a href="../collections/casual-shoes.html">Casual</a></li>
+                    <li><a href="../collections/formal-shoes.html">Formal</a></li>
+                    <li><a href="../collections/sale.html">Sale</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Wishlist Section -->
+    <section class="wishlist-section">
+        <div class="container">
+            <div class="wishlist-header">
+                <h1>My Wishlist</h1>
+                <p class="wishlist-count">8 items saved for later</p>
+            </div>
+
+            <!-- Sort and Share Options -->
+            <div class="wishlist-sort">
+                <div class="sort-options">
+                    <span>Sort by:</span>
+                    <select class="sort-select">
+                        <option value="date">Date Added</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Product Name</option>
+                    </select>
+                </div>
+                <div class="wishlist-share">
+                    <span>Share your wishlist:</span>
+                    <a href="#" class="share-btn">
+                        <i class="fab fa-facebook-f"></i>
+                        Facebook
+                    </a>
+                    <a href="#" class="share-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Wishlist Items -->
+            <div class="wishlist-grid">
+                <!-- Wishlist Item 1 -->
+                <div class="wishlist-item">
+                    <div class="wishlist-actions">
+                        <div class="wishlist-action-btn remove" title="Remove from wishlist">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="wishlist-action-btn cart" title="Add to cart">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                    </div>
+                    <div class="product-img">
+                        <img src="../images/product-1.jpg" alt="Clarks Desert Boot">
+                        <div class="sale-badge">Sale</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Men's Casual</div>
+                        <div class="product-name">Clarks Desert Boot</div>
+                        <div class="product-price">
+                            <span class="price">KES 4,999 <span>KES 6,499</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wishlist Item 2 -->
+                <div class="wishlist-item">
+                    <div class="wishlist-actions">
+                        <div class="wishlist-action-btn remove" title="Remove from wishlist">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="wishlist-action-btn cart" title="Add to cart">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                    </div>
+                    <div class="product-img">
+                        <img src="../images/product-2.jpg" alt="Clarks Wallabee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Men's Casual</div>
+                        <div class="product-name">Clarks Wallabee</div>
+                        <div class="product-price">
+                            <span class="price">KES 5,499</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wishlist Item 3 -->
+                <div class="wishlist-item">
+                    <div class="wishlist-actions">
+                        <div class="wishlist-action-btn remove" title="Remove from wishlist">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="wishlist-action-btn cart" title="Add to cart">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                    </div>
+                    <div class="product-img">
+                        <img src="../images/product-3.jpg" alt="Clarks Originals">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Women's Casual</div>
+                        <div class="product-name">Clarks Originals</div>
+                        <div class="product-price">
+                            <span class="price">KES 4,799</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wishlist Item 4 -->
+                <div class="wishlist-item">
+                    <div class="wishlist-actions">
+                        <div class="wishlist-action-btn remove" title="Remove from wishlist">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="wishlist-action-btn cart" title="Add to cart">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                    </div>
+                    <div class="product-img">
+                        <img src="../images/product-4.jpg" alt="Clarks Formal Shoes">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Men's Formal</div>
+                        <div class="product-name">Clarks Formal Shoes</div>
+                        <div class="product-price">
+                            <span class="price">KES 6,299</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wishlist Item 5 -->
+                <div class="wishlist-item">
+                    <div class="wishlist-actions">
+                        <div class="wishlist-action-btn remove" title="Remove from wishlist">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="wishlist-action-btn cart" title="Add to cart">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                    </div>
+                    <div class="product-img">
+                        <img src="../images/category-kids.jpg" alt="Clarks Kids School Shoes">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Kids' School Shoes</div>
+                        <div class="product-name">Clarks Kids School Shoes</div>
+                        <div class="product-price">
+                            <span class="price">KES 3,499</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wishlist Item 6 -->
+                <div class="wishlist-item">
+                    <div class="wishlist-actions">
+                        <div class="wishlist-action-btn remove" title="Remove from wishlist">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="wishlist-action-btn cart" title="Add to cart">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                    </div>
+                    <div class="product-img">
+                        <img src="../images/product-3.jpg" alt="Clarks Women's Heels">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Women's Formal</div>
+                        <div class="product-name">Clarks Women's Heels</div>
+                        <div class="product-price">
+                            <span class="price">KES 5,299</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wishlist Actions -->
+            <div class="text-center">
+                <a href="../collections/shop-all.html" class="btn" style="margin-right: 15px;">Continue Shopping</a>
+                <button class="btn" style="background: var(--primary);">Add All to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recently Viewed Section -->
+    <section class="section features">
+        <div class="container">
+            <h2 class="section-title">You Might Also Like</h2>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="../images/product-1.jpg" alt="Clarks Desert Trek">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Men's Casual</div>
+                        <div class="product-name">Clarks Desert Trek</div>
+                        <div class="product-price">
+                            <span class="price">KES 5,799</span>
+                            <div class="add-to-cart">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="../images/product-3.jpg" alt="Clarks Women's Sandals">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Women's Sandals</div>
+                        <div class="product-name">Clarks Women's Sandals</div>
+                        <div class="product-price">
+                            <span class="price">KES 3,999</span>
+                            <div class="add-to-cart">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="../images/product-4.jpg" alt="Clarks Oxford Shoes">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Men's Formal</div>
+                        <div class="product-name">Clarks Oxford Shoes</div>
+                        <div class="product-price">
+                            <span class="price">KES 6,899</span>
+                            <div class="add-to-cart">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="../images/category-kids.jpg" alt="Clarks Kids Casual">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Kids' Casual</div>
+                        <div class="product-name">Clarks Kids Casual</div>
+                        <div class="product-price">
+                            <span class="price">KES 2,999</span>
+                            <div class="add-to-cart">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="../collections/mens-shoes.html">Men's Shoes</a></li>
+                        <li><a href="../collections/womens-shoes.html">Women's Shoes</a></li>
+                        <li><a href="../collections/kids-shoes.html">Kids' Shoes</a></li>
+                        <li><a href="../collections/new-arrivals.html">New Arrivals</a></li>
+                        <li><a href="../collections/best-sellers.html">Best Sellers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Help</h3>
+                    <ul>
+                        <li><a href="customer-service.html">Customer Service</a></li>
+                        <li><a href="track-order.html">Track Order</a></li>
+                        <li><a href="returns-exchanges.html">Returns & Exchanges</a></li>
+                        <li><a href="shipping-info.html">Shipping</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="our-story.html">Our Story</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="corporate-responsibility.html">Corporate Responsibility</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+                        <li><i class="fas fa-phone"></i> +254 700 123 456</li>
+                        <li><i class="fas fa-envelope"></i> info@myclarks.co.ke</li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="https://facebook.com/myclarkskenya"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/myclarkskenya"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/myclarkskenya"><i class="fab fa-instagram"></i></a>
+                        <a href="https://pinterest.com/myclarkskenya"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 MyClarks Kenya. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be populated here -->
+        </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span>KES 0</span>
+        </div>
+        <button class="btn" style="width: 100%;">Checkout</button>
+    </div>
+
+    <!-- Notification -->
+    <div class="wishlist-notification">
+        Item added to cart successfully!
+    </div>
+
+    <script src="../scripts/main.js"></script>
+    <script>
+        // Wishlist page specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const removeButtons = document.querySelectorAll('.wishlist-action-btn.remove');
+            const addToCartButtons = document.querySelectorAll('.wishlist-action-btn.cart');
+            const notification = document.querySelector('.wishlist-notification');
+
+            // Remove item from wishlist
+            removeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const wishlistItem = this.closest('.wishlist-item');
+                    wishlistItem.style.opacity = '0';
+                    setTimeout(() => {
+                        wishlistItem.remove();
+                        updateWishlistCount();
+                    }, 300);
+                });
+            });
+
+            // Add item to cart from wishlist
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Show notification
+                    notification.classList.add('show');
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                    }, 3000);
+
+                    // Update cart count
+                    const cartCount = document.querySelector('.cart-count');
+                    let count = parseInt(cartCount.textContent);
+                    cartCount.textContent = count + 1;
+                });
+            });
+
+            // Update wishlist count
+            function updateWishlistCount() {
+                const wishlistItems = document.querySelectorAll('.wishlist-item').length;
+                const wishlistCount = document.querySelector('.wishlist-count');
+                wishlistCount.textContent = `${wishlistItems} items saved for later`;
+            }
+
+            // Sort functionality
+            const sortSelect = document.querySelector('.sort-select');
+            sortSelect.addEventListener('change', function() {
+                // In a real application, this would sort the wishlist items
+                // For this example, we'll just show a notification
+                notification.textContent = `Wishlist sorted by ${this.options[this.selectedIndex].text}`;
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
