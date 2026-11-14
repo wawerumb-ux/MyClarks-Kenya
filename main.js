@@ -33,6 +33,18 @@ filterButtons.forEach(button => {
     });
 });
 
+// Search Button
+const searchButtons = document.querySelectorAll('.search-btn');
+searchButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const searchBar = this.closest('.search-bar');
+        const input = searchBar ? searchBar.querySelector('input') : null;
+        if (input) {
+            input.focus();
+        }
+    });
+});
+
 // Add to Cart
 const addToCartButtons = document.querySelectorAll('.add-to-cart');
 addToCartButtons.forEach(button => {
@@ -47,7 +59,7 @@ addToCartButtons.forEach(button => {
         // Get product details
         const productCard = this.closest('.product-card');
         const productName = productCard.querySelector('.product-name').textContent;
-        const productPrice = productCard.querySelector('.price').textContent.split(' ')[0]; // Get first price (KES X,XXX)
+        const productPrice = productCard.querySelector('.price').textContent.trim();
         const productImage = productCard.querySelector('.product-img img').src;
         
         // Add to cart items
@@ -60,6 +72,27 @@ addToCartButtons.forEach(button => {
         }, 500);
     });
 });
+
+// Add All to Cart
+const addAllToCartButton = document.querySelector('.add-all-to-cart');
+if (addAllToCartButton) {
+    addAllToCartButton.addEventListener('click', function() {
+        const wishlistItems = document.querySelectorAll('.wishlist-item');
+        wishlistItems.forEach(item => {
+            const productName = item.querySelector('.product-name') ? item.querySelector('.product-name').textContent.trim() : '';
+            const productPrice = item.querySelector('.price') ? item.querySelector('.price').textContent.trim() : '';
+            const productImage = item.querySelector('.product-img img') ? item.querySelector('.product-img img').src : '';
+            if (productName && productPrice) {
+                addToCartItems(productName, productPrice, productImage);
+            }
+        });
+        updateCartCount();
+        const cartSidebar = document.querySelector('.cart-sidebar');
+        if (cartSidebar) {
+            cartSidebar.classList.add('active');
+        }
+    });
+}
 
 // Quantity Controls
 const quantityBtns = document.querySelectorAll('.quantity-btn');
