@@ -377,6 +377,10 @@ nav {
     backdrop-filter: var(--glass-blur);
 }
 
+.btn-block {
+    width: 100%;
+}
+
 .btn::before {
     content: '';
     position: absolute;
@@ -398,6 +402,10 @@ nav {
     animation: btnGlow 0.5s ease-out;
 }
 
+.btn-primary {
+    background: var(--primary);
+}
+
 @keyframes btnGlow {
     0% { box-shadow: var(--shadow-hover), 0 0 0 rgba(193, 154, 107, 0); }
     100% { box-shadow: var(--shadow-hover), 0 0 20px rgba(193, 154, 107, 0.4); }
@@ -415,6 +423,11 @@ nav {
     color: var(--primary);
     transform: translateY(-5px) rotateX(10deg);
     box-shadow: var(--shadow-hover);
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
 }
 
 /* Categories Section */
@@ -751,6 +764,10 @@ nav {
     text-align: center;
     padding: 80px 0;
     position: relative;
+}
+
+.newsletter.sale {
+    background-color: #e94560;
 }
 
 .newsletter::after {
@@ -1202,6 +1219,14 @@ footer {
 /* Text Center Utility */
 .text-center {
     text-align: center;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.mr-15 {
+    margin-right: 15px;
 }
 
 /* Best Sellers Section Specific Styles */
