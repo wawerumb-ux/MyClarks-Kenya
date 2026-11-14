@@ -1,16 +1,24 @@
 // Toggle Cart Sidebar
-document.querySelector('.cart-icon').addEventListener('click', function() {
-    document.querySelector('.cart-sidebar').classList.add('active');
-});
+const cartIcon = document.querySelector('.cart-icon');
+if (cartIcon) {
+    cartIcon.addEventListener('click', function() {
+        document.querySelector('.cart-sidebar').classList.add('active');
+    });
+}
 
-document.querySelector('.close-cart').addEventListener('click', function() {
-    document.querySelector('.cart-sidebar').classList.remove('active');
-});
+const closeCart = document.querySelector('.close-cart');
+if (closeCart) {
+    closeCart.addEventListener('click', function() {
+        document.querySelector('.cart-sidebar').classList.remove('active');
+    });
+}
 
-// Mobile Menu Toggle
-document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-    document.querySelector('.nav-links').classList.toggle('active');
-});
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('active');
+    });
+}
 
 // Filter Buttons
 const filterButtons = document.querySelectorAll('.filter-btn');
@@ -186,12 +194,15 @@ function filterProducts(category) {
 }
 
 // Newsletter form submission
-document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = this.querySelector('input').value;
-    
-    if (email) {
-        alert('Thank you for subscribing to our newsletter!');
-        this.querySelector('input').value = '';
-    }
-});
+const newsletterForm = document.querySelector('.newsletter-form');
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input').value;
+        
+        if (email) {
+            alert('Thank you for subscribing to our newsletter!');
+            this.querySelector('input').value = '';
+        }
+    });
+}
